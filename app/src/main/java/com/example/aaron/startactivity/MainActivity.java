@@ -21,6 +21,19 @@ public class MainActivity extends AppCompatActivity {
     public void onGo(View view) {
         Intent i = new Intent(this, Main2Activity.class);
         i.putExtra("Name", personName.getText().toString());
-        startActivity(i);
+        startActivityForResult(i, 1);
+        //startActivity(i);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1){
+            if(resultCode == RESULT_OK){
+                String tmp = data.getStringExtra("Name");
+                personName.setText(tmp);
+            }
+        }
     }
 }
